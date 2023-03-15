@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -358,7 +359,7 @@ namespace TransferMods
                     $"Server & client mods have been transferred to {Path.GetFileName(pathNewSPT.Text)}" +
                     $"\n\n" +
                     $"{servercounter} server mods" +
-                    $"{clientcounter} client mods" +
+                    $"{clientcounter} client mods\n" +
                     $"\n\n" +
                     $"All transferrable mods were successfully transferred!" +
                     $"\n\n" +
@@ -476,6 +477,65 @@ namespace TransferMods
                 {
                     File.Copy(oldOrderFile, newOrderFile);
                 }
+            }
+        }
+
+        private void mainForm_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+        }
+
+        private void mainForm_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] items = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (items.Length == 1)
+            {
+                FileAttributes attr = File.GetAttributes(items[0]);
+                if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
+                {
+                    string fullPath = items[0];
+
+                    bool existsAkiServer = File.Exists(Path.Combine(fullPath, "Aki.Server.exe"));
+                    bool existsakiLauncher = File.Exists(Path.Combine(fullPath, "Aki.Launcher.exe"));
+                    bool existsakiData = Directory.Exists(Path.Combine(fullPath, "Aki_Data"));
+
+                    bool existsUser = Directory.Exists(Path.Combine(fullPath, "user\\mods"));
+                    bool existsBepIn = Directory.Exists(Path.Combine(fullPath, "BepInEx\\plugins"));
+
+                    if (existsAkiServer && existsakiLauncher && existsakiData && existsUser && existsBepIn)
+                    {
+                        pathNewSPT.Text = fullPath;
+                        string folderName = Path.GetFileName(fullPath);
+
+                        chkServerMods.Enabled = true;
+                        chkClientMods.Enabled = true;
+                        chkOrder.Enabled = true;
+
+                        btnTransferMods.Enabled = true;
+                        btnTransferMods.Text = $"Transfer mods to {folderName}";
+
+                        checkBoxtimer.Start();
+                        checkCompatibility(pathMainFolder.Text, pathNewSPT.Text);
+                    }
+                    else
+                    {
+                        showMessage("We could not detect an SPT installation in this folder, please try again.");
+                        chkServerMods.Enabled = false;
+                        chkClientMods.Enabled = false;
+                        btnTransferMods.Enabled = false;
+                    }
+                }
+                else
+                {
+                    showMessage("File-drop detected. Please only drag-and-drop an SPT folder.");
+                }
+            }
+            else
+            {
+                showMessage("Two or more items detected. Please only drag-and-drop 1 SPT folder.");
             }
         }
     }

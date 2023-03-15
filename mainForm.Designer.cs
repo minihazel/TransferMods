@@ -312,6 +312,8 @@
             this.Text = "Transfer SPT Mods";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
             this.Load += new System.EventHandler(this.mainForm_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.mainForm_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.mainForm_DragEnter);
             this.panelAppPaths.ResumeLayout(false);
             this.panelAppPaths.PerformLayout();
             this.panelNewSPT.ResumeLayout(false);
