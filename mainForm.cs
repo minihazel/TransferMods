@@ -305,7 +305,7 @@ namespace TransferMods
                     $"{server_mods} server mods" +
                     $"{client_mods} client mods" +
                     $"\n\n" +
-                    $"Click \'Yes' to transfer.", this.Text, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    $"Click \'Yes\' to transfer.", this.Text, MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     string newServerModsFolder = Path.Combine(pathNewSPT.Text, "user\\mods");
                     string newClientModsFolder = Path.Combine(pathNewSPT.Text, "BepInEx\\plugins");
@@ -353,9 +353,8 @@ namespace TransferMods
                             }
                         }
                     }
-                }
 
-                if (MessageBox.Show($"Mod transfer successful!\n" +
+                    if (MessageBox.Show($"Mod transfer successful!\n" +
                     $"Server & client mods have been transferred to {Path.GetFileName(pathNewSPT.Text)}" +
                     $"\n\n" +
                     $"{servercounter} server mods" +
@@ -365,8 +364,9 @@ namespace TransferMods
                     $"\n\n" +
                     $"Click \'Yes\' to close this window and keep {this.Text} open\n" +
                     $"Click \'No\' to close {this.Text}", this.Text, MessageBoxButtons.YesNo) == DialogResult.No)
-                {
-                    Application.Exit();
+                    {
+                        Application.Exit();
+                    }
                 }
             }
             else if (chkServerMods.Checked && !chkClientMods.Checked)
@@ -394,9 +394,8 @@ namespace TransferMods
                             }
                         }
                     }
-                }
 
-                if (MessageBox.Show($"Mod transfer successful!\n" +
+                    if (MessageBox.Show($"Mod transfer successful!\n" +
                     $"Server mods have been transferred to {Path.GetFileName(pathNewSPT.Text)}" +
                     $"\n\n" +
                     $"{servercounter} server mods" +
@@ -405,8 +404,9 @@ namespace TransferMods
                     $"\n\n" +
                     $"Click \'Yes\' to close this window and keep {this.Text} open\n" +
                     $"Click \'No\' to close {this.Text}", this.Text, MessageBoxButtons.YesNo) == DialogResult.No)
-                {
-                    Application.Exit();
+                    {
+                        Application.Exit();
+                    }
                 }
             }
             else if (!chkServerMods.Checked && chkClientMods.Checked)
@@ -449,9 +449,8 @@ namespace TransferMods
                             }
                         }
                     }
-                }
 
-                if (MessageBox.Show($"Mod transfer successful!\n" +
+                    if (MessageBox.Show($"Mod transfer successful!\n" +
                     $"Clients mods have been transferred to {Path.GetFileName(pathNewSPT.Text)}" +
                     $"\n\n" +
                     $"{clientcounter} client mods" +
@@ -460,8 +459,9 @@ namespace TransferMods
                     $"\n\n" +
                     $"Click \'Yes\' to close this window and keep {this.Text} open\n" +
                     $"Click \'No\' to close {this.Text}", this.Text, MessageBoxButtons.YesNo) == DialogResult.No)
-                {
-                    Application.Exit();
+                    {
+                        Application.Exit();
+                    }
                 }
             }
 
