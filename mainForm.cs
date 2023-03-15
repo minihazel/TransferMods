@@ -303,7 +303,7 @@ namespace TransferMods
                 if (MessageBox.Show($"Would you like to transfer {server_mods + client_mods} mods to {Path.GetFileName(pathNewSPT.Text)}?" +
                     $"\n\n" +
                     $"{server_mods} server mods" +
-                    $"{client_mods} client mods" +
+                    $"{client_mods} client mods\n" +
                     $"\n\n" +
                     $"Click \'Yes\' to transfer.", this.Text, MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
