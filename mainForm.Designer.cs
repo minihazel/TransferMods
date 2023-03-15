@@ -309,7 +309,7 @@
             this.MaximizeBox = false;
             this.Name = "mainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transfer SPT Mods";
+            this.Text = "Transfer SPT Mods - thanks flaticons!";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.mainForm_DragDrop);
