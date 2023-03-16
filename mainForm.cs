@@ -153,7 +153,7 @@ namespace TransferMods
         {
             var sptPath = OpenSPTFolder();
             if (!string.IsNullOrEmpty(sptPath))
-                SetupControls(sptPath);
+                SetupControls(Path.GetDirectoryName(sptPath));
         }
 
         private string OpenSPTFolder()
